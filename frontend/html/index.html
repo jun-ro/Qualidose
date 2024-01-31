@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/index.css" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <div class="side-bar-container">
+      <div class="side-bar">
+        <div class="bottom-sidebar">
+          <div class="user-container">
+            <div class="user-icon"></div>
+            <p class="username"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-container">
+      <div class="send-container">
+        <input class="sendId" type="text" placeholder="Id" />
+        <button class="send">Send</button>
+      </div>
+      <div class="main">
+      </div>
+      <div class="add-container">
+        <button class="addclose">X</button>
+        <p>Hour</p>
+        <input class="hour" type="number" inputmode="numeric">
+        <p>Minutes</p>
+        <input class="minutes" type="number" inputmode="numeric">
+        <p>Name</p>
+        <input class="name" type="text">
+        <button class="addnew">Add</button>
+      </div>
+      <div class="button-container">
+        <button class="edit"></button>
+        <button class="add">+</button>
+      </div>
+    </div>
+    <script src="../js/sessionReciever.js"></script>
+    <script src="../js/userManager.js"></script>
+    <script src="../js/imageLoader.js"></script>
+    <script src="../js/buttonManager.js"></script>
+    <script src="../js/dataLoader.js"></script>
+  </body>
+</html>

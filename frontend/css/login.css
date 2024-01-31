@@ -1,0 +1,75 @@
+body {
+    margin: 0;
+    background-color: #ff9f79;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    /* Ensure the body takes the full height of the viewport */
+    margin: 0;
+    /* Remove default body margin */
+}
+
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.input-container input {
+    width: 300px;
+    height: 50px;
+    font-family: 'Work Sans Bold', 'Helvetica';
+    margin-bottom: 10px;
+    /* Adjust the spacing between inputs */
+    background-color: transparent;
+    box-shadow: 0 4px 1px rgba(0, 0, 0, 0.2); /* Black box shadow at the bottom */
+    border-style: none;
+    color: white;
+    text-decoration: none;
+    outline: none;
+    vertical-align: bottom;
+    padding-top: -10px;
+    margin-top: 15px;
+}
+
+.input-container input::placeholder {
+    color: white; /* Change the placeholder color to gray */
+}
+
+.Login{
+    cursor: pointer;
+    margin-top: 15px;
+    width: 250px;
+    height: 50px;
+    color: white;
+    font-family: "Work Sans Bold", "Helvetica";
+    font-weight: bold;
+    border-radius: 15px;
+    background-color: rgb(255, 61, 61);
+    outline: none;
+    text-decoration: none;
+    border-style: none;
+    font-size: 25px;
+    transition: 0.3s;
+}
+
+.Login:hover{
+    transform: translateY(-10px);
+}
+
+.Login:active{
+    transform: translateY(0px);
+}
+
+a {
+    margin-top: 10px;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+    text-align: left;
+
+}
