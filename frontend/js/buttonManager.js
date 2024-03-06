@@ -3,9 +3,11 @@ const addButton = document.querySelector('.add');
 const closeaddButton = document.querySelector('.addclose')
 const cardElements = document.getElementsByClassName('card-container');
 const addnewButton = document.querySelector('.addnew')
+const sendButton = document.querySelector('.send')
 
 
 let debounce = false;
+let addCardDebounce = false;
 
 editButton.addEventListener('click', () => {
     if (!debounce) {
@@ -40,9 +42,11 @@ closeaddButton.addEventListener('click', () => {
     const addContainer = document.querySelector('.add-container')
     const topValue = parseInt(window.getComputedStyle(addContainer).getPropertyValue('top'))
 
-    if (topValue < 268) {
+    if (addCardDebounce === false) {
+        addCardDebounce = true;
         addContainer.style.animation = 'popdown 0.3s forwards'
     } else {
+        addCardDebounce = false;
         addContainer.style.animation = 'moveup 0.3s forwards'
     }
 })
@@ -52,9 +56,11 @@ addButton.addEventListener('click', () => {
     const addContainer = document.querySelector('.add-container')
     const topValue = parseInt(window.getComputedStyle(addContainer).getPropertyValue('top'))
 
-    if (topValue < 268) {
+    if (addCardDebounce === false) {
+        addCardDebounce = true;
         addContainer.style.animation = 'popdown 0.3s forwards'
     } else {
+        addCardDebounce = false
         addContainer.style.animation = 'moveup 0.3s forwards'
     }
 })
@@ -126,6 +132,7 @@ addnewButton.addEventListener('click', () => {
 
         localStorage.setItem(document.getElementsByClassName('card-container').length.toString(), JSON.stringify(medicineObject))
 
+
         // Clear input values for the next entry
 
         hourElement.value = '';
@@ -136,4 +143,50 @@ addnewButton.addEventListener('click', () => {
         // Handle invalid input values (show an error message, etc.)
         console.log('Invalid hour or minute value.');
     }
+});
+
+sendButton.addEventListener('click', () => {
+    new Promise((resolve, reject) => {
+            const data = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (!isNaN(key)) {
+                    const value = localStorage.getItem(key);
+                    data.push({
+                        key,
+                        value
+                    });
+                }
+            }
+            resolve(data);
+        })
+        .then(data => {
+            // Do something with the data
+
+            fetch('/writeData', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json' // Assuming the body is JSON data
+                    },
+                    body: JSON.stringify({
+                        token: localStorage.getItem("session_token"),
+                        data: data
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json(); // Assuming server responds with JSON data
+                })
+                .then(data => {
+                    console.log('Data successfully sent:', data);
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        })
+        .catch(error => {
+            console.error("Error accessing localStorage:", error);
+        });
 });
