@@ -81,7 +81,7 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Invalid username or password.' });
         }
     
-        token = jwt.sign({ username: user.username }, process.env.SECRET_KEY, { expiresIn: '1h' });
+        token = jwt.sign({ username: user.username }, process.env.SECRET_KEY, { expiresIn: '1y' });
 
 
         user.session_token = token;
